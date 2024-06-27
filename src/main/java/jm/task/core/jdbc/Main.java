@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) {
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
-        userService.saveUser("Name1", "LastName1", (byte) 99);
-        userService.saveUser("Name2", "LastName2", (byte) 121);
+        userService.saveUser("Ivan", "Grozny", (byte) 99);
+        userService.saveUser("Ivan", "The Fool", (byte) 121);
         System.out.println(userService.getAllUsers());
         Util.close();
     }
