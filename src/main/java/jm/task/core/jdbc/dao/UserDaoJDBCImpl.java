@@ -21,7 +21,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try(Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
     }
 
@@ -30,7 +30,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try(Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
     }
 
@@ -42,7 +42,7 @@ public class UserDaoJDBCImpl implements UserDao {
             stmt.setByte(3, age);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
     }
 
@@ -52,7 +52,7 @@ public class UserDaoJDBCImpl implements UserDao {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
     }
 
@@ -70,7 +70,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 users.add(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
         return users;
     }
@@ -80,7 +80,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try(Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Util.log(e);
         }
     }
 }
