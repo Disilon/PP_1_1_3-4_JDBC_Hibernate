@@ -6,11 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
     private final SessionFactory sessionFactory = Util.getSessionFactory();
+
     public UserDaoHibernateImpl() {
     }
 
@@ -27,9 +27,6 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery(sql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             Util.log(e);
         }
     }
@@ -43,9 +40,6 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery(sql).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             Util.log(e);
         }
     }
@@ -70,6 +64,10 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
+            if (session == null) {
+                Util.log(new Exception("Session is null"));
+                return;
+            }
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             session.delete(user);
@@ -86,6 +84,9 @@ public class UserDaoHibernateImpl implements UserDao {
     public List<User> getAllUsers() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("from User", User.class).list();
+        } catch (Exception e) {
+            Util.log(e);
+            return null;
         }
     }
 

@@ -39,6 +39,7 @@ public class Util {
             log(e);
         }
     }
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
@@ -77,6 +78,7 @@ public class Util {
             }
         }
     }
+
     public static void log(Exception e) {
         logger.warning(e.getMessage());
     }

@@ -2,8 +2,6 @@ package jm.task.core.jdbc.model;
 
 import jakarta.persistence.*;
 
-import javax.persistence.Column;
-
 @Entity
 @Table(name = "users")
 public class User {
