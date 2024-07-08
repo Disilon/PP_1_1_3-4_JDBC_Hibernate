@@ -11,6 +11,7 @@ public class Main {
         userService.createUsersTable();
         userService.saveUser("Ivan", "Grozny", (byte) 99);
         userService.saveUser("Ivan2", "The Fool", (byte) 121);
+        userService.removeUserById(1);
         System.out.println(userService.getAllUsers());
         userService.cleanUsersTable();
         Util.closeFactory();

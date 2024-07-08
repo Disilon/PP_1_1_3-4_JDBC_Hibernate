@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -64,12 +65,12 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            if (session == null) {
-                Util.log(new Exception("Session is null"));
-                return;
-            }
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
+            if (user == null) {
+                Util.log(new Exception("Trying to remove not existent user. User is null"));
+                return;
+            }
             session.delete(user);
             transaction.commit();
         } catch (Exception e) {
@@ -86,7 +87,7 @@ public class UserDaoHibernateImpl implements UserDao {
             return session.createQuery("from User", User.class).list();
         } catch (Exception e) {
             Util.log(e);
-            return null;
+            return new ArrayList<>();
         }
     }
 
